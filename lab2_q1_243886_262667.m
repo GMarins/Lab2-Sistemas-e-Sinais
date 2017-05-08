@@ -15,6 +15,17 @@
 % integradores e outros blocos básicos, e simule as trˆes respostas calculadas anteriormente
 % (natural, forçada e completa). Compare com o resultado obtido nos itens anteriores.
 
+%Conclusão:
+%Plotando os gráficos de cada uma das resposta podemos adquirir uma boa
+%intuição do funcionamento dos sistemas. Podemos avaliar o impacto das
+%condições iniciais e da excitação externa na formação da resposta
+%completa. O uso do simulink se mostra bem mais prático que a resolução
+%manual das EDOs, além de possibilitar a visualização do sistema na forma
+%de blocos - linguagem esta utilizada também em controladores industriais.
+%Alterando as condições iniciais dos blocos integradores pudemos
+%simular cada uma das respostas separadamente.
+%Por fim, pudemos validar a resposta obtida analiticamente através do
+%simulink através da simulação que nos retornou os mesmos gráficos.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 tic
 %Vetor de tempo
@@ -36,6 +47,16 @@ yf = 1 - exp(-2*t).*cos(sqrt(21)*t) - 2/sqrt(21)*exp(-2*t).*sin(sqrt(21)*t);
 %Por fim, a resposta completa é a soma das duas
 yc = yf + yn;
 
+%%
+%Comparado com o obtido no Simulink
+%Scope 2 - Resposta Natural
+%Scope 1 - Resposta Forçada
+%Scope - Resposta Completa
+
+simOut = sim('lab2q1blockdiagram');
+
+
+%%
 fig = figure
 fig.Name = 'Questão 1';
 fig.OuterPosition = [0 0 1000 700];

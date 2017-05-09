@@ -8,7 +8,6 @@
 % quanto a reposta impulsiva em uma figura.
 %Avalie se o sistema é BIBO estável, sua causalidade e se o sistema tem
 %memória
-
 %Conclusão:
 %Através da análise da resposta do sistema ao impulso, podemos avaliar os
 %aspectos do sistema de forma direta. Podemos avaliar que o sistema é BIBO

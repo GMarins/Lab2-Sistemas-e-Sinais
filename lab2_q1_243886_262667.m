@@ -14,7 +14,6 @@
 % (d)Implemente em um arquivo simulink a equaçao diferencial (1) usando blocos somadores,
 % integradores e outros blocos básicos, e simule as trˆes respostas calculadas anteriormente
 % (natural, forçada e completa). Compare com o resultado obtido nos itens anteriores.
-
 %Conclusão:
 %Plotando os gráficos de cada uma das resposta podemos adquirir uma boa
 %intuição do funcionamento dos sistemas. Podemos avaliar o impacto das
@@ -28,6 +27,7 @@
 %simulink através da simulação que nos retornou os mesmos gráficos.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 tic
+clear all
 %Vetor de tempo
 t = 0:0.0001:3;
 

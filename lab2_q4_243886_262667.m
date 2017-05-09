@@ -4,7 +4,7 @@
 %Arthur Koucher - 262667
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Considere um sistema de segunda ordem representado pela seguinte equação de diferenças:
-% y[n] ? 0.81y[n ? 2] = 5x[n ? 1] ? 3.5x[n ? 2]
+% y[n] - 0.81y[n - 2] = 5x[n - 1] ? 3.5x[n - 2]
 %(a) Calcule a resposta ntural do sistema, considerando as condições
 %iniciais y[-1] = -8 e y[-2] = -2
 %(b) Calcule a resposta forçada do sistema, para um sinal de entrada 
@@ -12,6 +12,10 @@
 %(c) Utilizando um arquivo lote apresente, em uma mesma figura, os gráficos
 %da resposta natural, forçada e completa. Considere 0<=n<=60 amostras
 %(d) Implemente em um arquivo simulink a equação de diferenças obtida
+%Conclusão: O uso do simulink permite a visualização direta do sistema
+%discreto. Sua implementação é intuitiva e fácil e, como pudemos ver,
+%apresentou a mesma resposta que o desenvolvimento analítico, validando a
+%resolução. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear all
@@ -31,7 +35,10 @@ yf = 7.8947 - 5.5555*(0.9).^n - 2.3392*(-0.9).^n;
 yc = yn + yf;
 
 %Simulação do modelo em Simulink
-
+%Para a simulação da resposta completa, foi necessário computar yc[0] e
+%yc[1], visto que o sistema é simulado para n > 0 e, portanto, não era
+%válido alimentar a simulação com os dados de y[-2] ou y[-1]
+sim('lab2q4blockdiagram');
 
 %%
 fig = figure
@@ -60,6 +67,35 @@ stem(n,yc);
 xlabel('n');
 ylabel('${ y }_{ c }[n]$','Interpreter','LaTex');
 title('Resposta Completa');
+grid on;
+axis([0 60 -2 8.1])
+%%
+fig = figure
+fig.Name = 'Questão 4 - Simulink';
+fig.OuterPosition = [0 0 1000 700];
+
+subplot(1,3,1);
+stem(n,ynatural.signals.values);
+xlabel('n');
+ylabel('${ y }_{ n }[n]$','Interpreter','LaTex');
+title('Resposta Natural - Simulink');
+grid on;
+axis([0 60 -7 1])
+
+
+subplot(1,3,2);
+stem(n,yforcada.signals.values);
+xlabel('n');
+ylabel('${ y }_{ f }[n]$','Interpreter','LaTex');
+title('Resposta Forçada - Simulink');
+grid on;
+axis([0 60 0 8.1])
+
+subplot(1,3,3);
+stem(n,yc);
+xlabel('n');
+ylabel('${ y }_{ c }[n]$','Interpreter','LaTex');
+title('Resposta Completa - Simulink');
 grid on;
 axis([0 60 -2 8.1])
 %%

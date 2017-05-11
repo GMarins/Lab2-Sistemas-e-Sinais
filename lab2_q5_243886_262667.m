@@ -19,23 +19,22 @@
 %fato de que h[n] tende a 0 quando n tende a +infinito.
 
 clear all
+clc
 tic
 n = 0:1:60;
 
 %Resposta ao degrau unitário, obtida na última questão
 yf = 7.8947 - 5.5555*(0.9).^n - 2.3392*(-0.9).^n; %multiplicado pela função degrau , válido para n >= 0
-%Como o sistema é LTI, sabemos que combinações lineares de sinais na
-%entrada geram uma saída correspondente a essas combinações lineares dos
-%resposta aos sinais originais
+%Como o sistema é LTI, sabemos que operações lineares nos sinais da entrada
+%geram operações semelhantess na saída.
 %Ou seja h[n] = yf[n] - yf[n-1]
 
-%Para evitar problemas no domínio da função ao transformar a variável 'n'
-%em 'n-1' na linha 18, vamos utilizar a função circshift, que realiza o
-%deslocamento
-yfdeslocado = circshift(yf',1)';
-yfdeslocado(1) = 0; %correção do resíduo no primeiro componente
+%Iremos computar h[n] através da função diff, que calcula as diferenças
+%numéricas entre cada elemento
+h = diff(yf);
+h = [0 h]; %Adicionamos o zero como primeiro elemento para manter a coerência com a função degrau
 
-h = yf - yfdeslocado;
+
 fig = figure
 fig.Name = 'Questão 5a';
 fig.OuterPosition = [0 0 1000 700];
@@ -54,17 +53,15 @@ legend('Resposta ao Degrau','Resposta ao Impulso');
 
 n = 0:1:1e6;
 yf = 7.8947 - 5.5555*(0.9).^n - 2.3392*(-0.9).^n;
-yfdeslocado = circshift(yf',1)';
-yfdeslocado(1) = 0;
-h = yf - yfdeslocado;
+h = diff(yf);
+h = [0 h];
 
 somatorio1 = sum(h)
 
 n = 0:1:1e7;
 yf = 7.8947 - 5.5555*(0.9).^n - 2.3392*(-0.9).^n;
-yfdeslocado = circshift(yf',1)';
-yfdeslocado(1) = 0;
-h = yf - yfdeslocado;
+h = diff(yf);
+h = [0 h];
 somatorio2 = sum(h)
 
 %Através do resultado podemos ver que a função é limitada e seu somatório
